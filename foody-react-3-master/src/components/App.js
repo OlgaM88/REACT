@@ -8,6 +8,7 @@ export default class App extends Component {
   state = {
     isModalWindowOpen: false,
     menu: [],
+    item: null,
   };
 
   componentDidMount() {
@@ -17,15 +18,18 @@ export default class App extends Component {
   }
 
   handleDeleteItem = id => {
-    API.deleteItemById(id).then(state => {
-      this.setState({ menu: state.menu.filter(item => item.id !== id) });
+    API.deleteItemById(id).then(response => {
+      this.setState(state => ({
+        menu: state.menu.filter(item => item.id !== id),
+      }));
     });
   };
 
   handleShowMoreInfo = id => {
-    API.getItemMenuById(id).then(state => {
+    API.getItemMenuById(id).then(response => {
       this.setState({
         isModalWindowOpen: true,
+        item: response.data,
       });
     });
   };
@@ -43,7 +47,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { isModalWindowOpen, menu } = this.state;
+    const { isModalWindowOpen, menu, item } = this.state;
 
     return (
       <div>
@@ -51,12 +55,16 @@ export default class App extends Component {
         <OrderHistory
           orders={menu}
           onDelete={this.handleDeleteItem}
-          onShowMore={this.handleonShowMoreInfo}
+          onShowMore={this.handleShowMoreInfo}
         />
         <button type="button" onClick={this.openModalWindow}>
           Open Modal
         </button>
-        {isModalWindowOpen && <Modal onClose={this.closeModalWindow} />}
+        {isModalWindowOpen && (
+          <Modal className="Modal" onClose={this.closeModalWindow}>
+            <p>{item.price}</p>
+          </Modal>
+        )}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/menu';
+const BASE_URL = 'http://localhost:3001/menu';
 
 const getAllMenuItems = () =>
   axios.get(BASE_URL).then(response => response.data);
