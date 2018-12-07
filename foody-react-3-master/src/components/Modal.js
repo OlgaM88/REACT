@@ -30,7 +30,8 @@ export default class Modal extends Component {
     evt.preventDefault();
     const isTargetOutsideContainer = this.innerRef.current.contains(evt.target);
     const { onClose } = this.props;
-    if (!isTargetOutsideContainer) {
+    const { isModalWindowOpen } = this.state;
+    if (isModalWindowOpen && !isTargetOutsideContainer) {
       onClose();
     }
   };

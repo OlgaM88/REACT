@@ -3,12 +3,15 @@ import Header from './Header';
 import OrderHistory from './OrderHistory';
 import Modal from './Modal';
 import * as API from './services/api';
+import FormToAddItem from './FormToAddItem';
+import SignIn from './SignIn';
 
 export default class App extends Component {
   state = {
     isModalWindowOpen: false,
     menu: [],
     item: null,
+    isLoading: false,
   };
 
   componentDidMount() {
@@ -26,9 +29,11 @@ export default class App extends Component {
   };
 
   handleShowMoreInfo = id => {
+    this.setState({ isLoading: true });
     API.getItemMenuById(id).then(response => {
       this.setState({
         isModalWindowOpen: true,
+        isLoading: false,
         item: response.data,
       });
     });
@@ -47,7 +52,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { isModalWindowOpen, menu, item } = this.state;
+    const { isModalWindowOpen, menu, item, isLoading } = this.state;
 
     return (
       <div>
@@ -60,11 +65,14 @@ export default class App extends Component {
         <button type="button" onClick={this.openModalWindow}>
           Open Modal
         </button>
+        {isLoading && <p className="LoadingMessage"> Загрузка даных...</p>}
         {isModalWindowOpen && (
           <Modal className="Modal" onClose={this.closeModalWindow}>
             <p>{item.price}</p>
           </Modal>
         )}
+        <FormToAddItem />
+        <SignIn />
       </div>
     );
   }
