@@ -10,15 +10,15 @@ const INITIAL_STATE = {
 export default class SignIn extends Component {
   state = { ...INITIAL_STATE };
 
-  handleChangeForm(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  handleSubmitForm(e) {
+  handleSubmitForm = e => {
     e.preventDefault();
     console.log(this.state);
     this.reset();
-  }
+  };
+
+  handleChangeForm = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     const { email, password, phone, username } = this.state;

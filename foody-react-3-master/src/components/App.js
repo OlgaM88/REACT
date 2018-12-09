@@ -4,7 +4,7 @@ import OrderHistory from './OrderHistory';
 import Modal from './Modal';
 import * as API from './services/api';
 import FormToAddItem from './FormToAddItem';
-import SignIn from './SignIn';
+import Authentication from './Authentication';
 
 export default class App extends Component {
   state = {
@@ -39,6 +39,14 @@ export default class App extends Component {
     });
   };
 
+  /* handleAddMenuItem = item => {
+    API.addMenuItem(item).then(newItem => {
+      this.setState(state => ({
+        menu: [...state.menu, newItem],
+      }));
+    });
+  }; */
+
   openModalWindow = () => {
     this.setState(state => ({
       isModalWindowOpen: true,
@@ -71,8 +79,8 @@ export default class App extends Component {
             <p>{item.price}</p>
           </Modal>
         )}
-        <FormToAddItem />
-        <SignIn />
+        <FormToAddItem onAddItem={this.handleAddMenuItem} />
+        <Authentication />
       </div>
     );
   }

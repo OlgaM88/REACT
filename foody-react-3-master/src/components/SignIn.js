@@ -8,15 +8,15 @@ const INITIAL_STATE = {
 export default class SignIn extends Component {
   state = { ...INITIAL_STATE };
 
-  handleChangeForm(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  handleSubmitForm(e) {
+  handleSubmitForm = e => {
     e.preventDefault();
     console.log(this.state);
     this.reset();
-  }
+  };
+
+  handleChangeForm = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     const { email, password } = this.state;
@@ -32,6 +32,7 @@ export default class SignIn extends Component {
                 name="email"
                 value={email}
                 placeholder="Enter your e-mail..."
+                onChange={this.handleChangeForm}
               />
             </label>
           </div>
@@ -39,10 +40,11 @@ export default class SignIn extends Component {
             <label htmlFor="password" value="password">
               Password
               <input
-                type="text"
+                type="password"
                 name="password"
                 value={password}
                 placeholder="Enter your password..."
+                onChange={this.handleChangeForm}
               />
             </label>
           </div>

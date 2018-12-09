@@ -16,7 +16,7 @@ const OrderHistory = ({ orders, onDelete, onShowMore }) => (
       {orders.map(order => (
         <OrderData
           key={order.id}
-          data={order.data}
+          data={order.date}
           price={order.price}
           delivery={order.address}
           rating={order.rating}
