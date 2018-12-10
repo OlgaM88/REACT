@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import * as API from '../server/api';
 import Header from './Header';
 import OrderHistory from './OrderHistory';
 import Modal from './Modal';
-import * as API from './services/api';
 import FormToAddItem from './FormToAddItem';
 import Authentication from './Authentication';
 
@@ -39,13 +39,16 @@ export default class App extends Component {
     });
   };
 
-  /* handleAddMenuItem = item => {
+  addMenuItem = item => {
+    this.setState({ isLoading: true });
+
     API.addMenuItem(item).then(newItem => {
-      this.setState(state => ({
-        menu: [...state.menu, newItem],
+      this.setState(prevState => ({
+        menu: [...prevState.menu, newItem],
+        isLoading: false,
       }));
     });
-  }; */
+  };
 
   openModalWindow = () => {
     this.setState(state => ({
@@ -76,10 +79,10 @@ export default class App extends Component {
         {isLoading && <p className="LoadingMessage"> Загрузка даных...</p>}
         {isModalWindowOpen && (
           <Modal className="Modal" onClose={this.closeModalWindow}>
-            <p>{item.price}</p>
+            {item && <p>{item.price}</p>}
           </Modal>
         )}
-        <FormToAddItem onAddItem={this.handleAddMenuItem} />
+        <FormToAddItem addItem={this.addMenuItem} />
         <Authentication />
       </div>
     );

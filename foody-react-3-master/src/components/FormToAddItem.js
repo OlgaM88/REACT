@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as API from './services/api';
 
 const INITIAL_STATE = {
   address: '',
@@ -17,13 +16,17 @@ export default class FormToAddItem extends Component {
     e.preventDefault();
 
     const { address, rating, price } = this.state;
+
     const newItem = {
       data: Date.now(),
       address,
       rating,
       price,
     };
-    API.addMenuItem(newItem);
+    const { addItem } = this.props;
+    addItem(newItem);
+
+    this.reset();
   };
 
   reset = () => {
@@ -32,11 +35,16 @@ export default class FormToAddItem extends Component {
 
   render() {
     const { address, rating, price } = this.state;
+    const { menu } = this.props;
 
     return (
       <div className="form">
         <h2>Add items</h2>
-        <form className="form-container" onSubmit={this.handleSubmitForm}>
+        <form
+          className="form-container"
+          onSubmit={this.handleSubmitForm}
+          items={menu}
+        >
           <div className="form-container__item">
             <label htmlFor="address" value="address">
               Address
@@ -71,13 +79,7 @@ export default class FormToAddItem extends Component {
               />
             </label>
           </div>
-          <button
-            type="button"
-            onSubmit={this.handleSubmitForm}
-            className="submit-btn"
-          >
-            Submit
-          </button>
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );

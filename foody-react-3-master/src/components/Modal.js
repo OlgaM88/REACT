@@ -3,19 +3,19 @@ import React, { Component, createRef } from 'react';
 export default class Modal extends Component {
   innerRef = createRef();
 
-  componentWillMount() {
-    window.removeEventListener('keyup', this.handleKeyUp);
-    document.removeEventListener('click', this.handleOutsideClick);
-  }
-
   componentDidMount() {
     window.addEventListener('keyup', this.handleKeyUp);
     document.addEventListener('click', this.handleOutsideClick);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { isModalWindowOpen } = this.state;
+    const { isModalWindowOpen } = this.props;
     return nextState.isModalWindowOpen !== isModalWindowOpen;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleKeyUp);
+    document.removeEventListener('click', this.handleOutsideClick);
   }
 
   handleKeyUp = evt => {
@@ -27,20 +27,20 @@ export default class Modal extends Component {
   };
 
   handleOutsideClick = evt => {
-    evt.preventDefault();
-    const isTargetOutsideContainer = this.innerRef.current.contains(evt.target);
-    const { onClose } = this.props;
-    const { isModalWindowOpen } = this.state;
-    if (isModalWindowOpen && !isTargetOutsideContainer) {
+    if (evt.target !== this.innerRef) {
+      const { onClose } = this.props;
       onClose();
     }
   };
+  /*
+    if (isModalWindowOpen && !isTargetOutsideContainer) {
+    */
 
   render() {
-    const { onClose, children } = this.props;
+    const { children, onClose } = this.props;
     return (
-      <div className="Backdrop">
-        <div className="ModalWindow" ref={this.innerRef}>
+      <div className="Backdrop" ref={this.innerRef}>
+        <div className="ModalWindow">
           <div className="ModalContent">{children}</div>
           <button type="button" onClick={onClose}>
             Close

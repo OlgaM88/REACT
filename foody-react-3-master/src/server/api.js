@@ -17,6 +17,10 @@ const deleteItemById = id =>
         console.log(object.type, object.message);
       }
     });
-const addMenuItem = item => axios.post(BASE_URL, item);
+const addMenuItem = item =>
+  axios
+    .post(BASE_URL, item)
+    .then(response => response.data)
+    .catch(error => console.error);
 
 export { getAllMenuItems, getItemMenuById, deleteItemById, addMenuItem };
