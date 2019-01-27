@@ -38,7 +38,7 @@ export default class FormToAddItem extends Component {
     const { menu } = this.props;
 
     return (
-      <div className="form">
+      <div className="form-addItem">
         <h2>Add items</h2>
         <form
           className="form-container"

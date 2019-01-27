@@ -41,6 +41,13 @@
       "rating": "4",
       "price": "46",
       "id": 7
+    },
+    {
+      "data": 1548614317098,
+      "address": "Wall Street 110",
+      "rating": "5",
+      "price": "300",
+      "id": 8
     }
   ]
 }

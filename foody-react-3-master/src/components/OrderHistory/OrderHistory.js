@@ -1,14 +1,15 @@
 import React from 'react';
 import OrderData from './OrderData';
 
+const orderColumns = ['Data', 'Price', 'Delivery', 'Rating'];
+
 const OrderHistory = ({ orders, onDelete, onShowMore }) => (
   <table className="order-list">
     <thead>
       <tr>
-        <th>Date</th>
-        <th>Price</th>
-        <th>Delivery</th>
-        <th>Rating</th>
+        {orderColumns.map(column => (
+          <th key={column}>{column}</th>
+        ))}
       </tr>
     </thead>
 

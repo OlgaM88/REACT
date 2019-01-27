@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import * as API from '../server/api';
-import Header from './Header';
-import OrderHistory from './OrderHistory';
+import Header from './Header/Header';
+import OrderHistory from './OrderHistory/OrderHistory';
 import Modal from './Modal';
-import FormToAddItem from './FormToAddItem';
-import Authentication from './Authentication';
+import FormToAddItem from './OrderHistory/FormToAddItem';
+import Authentication from './Header/Authentication/Authentication';
 
 export default class App extends Component {
   state = {

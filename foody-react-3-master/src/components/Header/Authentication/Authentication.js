@@ -3,7 +3,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 export default class Authentication extends Component {
-  state = { isSignIn: false, isSignUp: false };
+  state = { isSignIn: false };
 
   handleChangeForm(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -16,15 +16,15 @@ export default class Authentication extends Component {
   }
 
   openSignInForm() {
-    this.setState({ isSignIn: true, isSignUp: false });
+    this.setState({ isSignIn: true });
   }
 
   openSignUpForm() {
-    this.setState({ isSignIn: false, isSignUp: true });
+    this.setState({ isSignIn: false });
   }
 
   render() {
-    const { isSignIn, isSignUp } = this.state;
+    const { isSignIn } = this.state;
     return (
       <div className="wrapper">
         <div className="form-controller">
@@ -33,7 +33,7 @@ export default class Authentication extends Component {
             className="controller"
             onClick={this.openSignInForm.bind(this)}
           >
-            Log in
+            Sign in
           </button>
           <button
             type="button"
@@ -44,8 +44,7 @@ export default class Authentication extends Component {
           </button>
         </div>
         <div className="form-container" />
-        {isSignIn && <SignIn />}
-        {isSignUp && <SignUp />}
+        {isSignIn ? <SignIn /> : <SignUp />}
       </div>
     );
   }

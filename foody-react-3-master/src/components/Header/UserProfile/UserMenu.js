@@ -1,8 +1,8 @@
 import React, { Component, createRef } from 'react';
-import DropDown from './DropDown';
+import DropDown from './DropDownMenu/DropDownMenu';
 
 import Avatar from './Avatar';
-import userImage from './user-image.jpg';
+import userImage from '../../user-image.jpg';
 
 export default class UserMenu extends Component {
   containerRef = createRef();

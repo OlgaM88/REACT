@@ -7,11 +7,11 @@ const userMenuSettings = [
   { name: 'Meal Planer', link: '#meal' },
 ];
 
-const DropDown = () => (
+const DropDownMenu = () => (
   <div className="DropDown">
     <DropDownMenuList items={userMenuSettings} />
     <button type="button">Log out</button>
   </div>
 );
 
-export default DropDown;
+export default DropDownMenu;
